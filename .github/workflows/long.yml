@@ -2,7 +2,7 @@ name: Paperstack (Long)
 
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 15 * * 1' # This sets the action to run at 15:00 UTC on Mondays.
 
 jobs:
   call-core:
