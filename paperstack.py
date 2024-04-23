@@ -16,7 +16,8 @@ from scholar_utils import get_recommended_arxiv_ids_from_semantic_scholar
 
 ARXIV_SEARCH = """\
 "adversarial attacks" OR "language model attacks" OR "LLM vulnerabilities" OR \
-"AI security" OR "machine learning security" OR "jailbreak" OR "bypassing AI"\
+"AI security" OR "machine learning security" OR "jailbreak" OR "bypassing AI" OR \
+"data synthesis" OR "synthetic data" OR "data generation"\
 """
 
 
