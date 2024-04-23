@@ -9,6 +9,7 @@ class Focus(str, Enum):
     Defensive = "Defensive"
     Adversarial = "Adversarial"
     Safety = "Safety"
+    DataSynthesis = "Data Synthesis"
     Other = "Other"
 
 
