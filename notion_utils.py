@@ -67,8 +67,10 @@ def write_papers_to_notion(
                 "rich_text": [{"text": {"content": paper.summary}}]
             }
         if paper.authors:
+            # Truncate authors to the maximum allowed length of 100
+            truncated_authors = paper.authors[:100]
             properties["Authors"] = {
-                "multi_select": [{"name": author} for author in paper.authors]
+                "multi_select": [{"name": author} for author in truncated_authors]
             }
         if paper.published:
             properties["Published"] = {"date": {"start": paper.published.isoformat()}}
