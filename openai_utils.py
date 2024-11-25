@@ -26,7 +26,7 @@ def get_openai_client(token: str) -> OpenAIClient:
 
 def summarize_abstract_with_openai(client: OpenAIClient, abstract: str) -> str:
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": SUMMARIZE_ABSTRACT_PROMPT},
             {"role": "user", "content": f"{abstract}"},
