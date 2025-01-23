@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: '3.x'
 
@@ -31,8 +31,6 @@ jobs:
 
     - name: Run paperstack
       env:
-        NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-        NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         OPENAI_API_TOKEN: ${{ secrets.OPENAI_API_TOKEN }}
       run: |
         python paperstack.py \
@@ -41,7 +39,7 @@ jobs:
           ${{ inputs.search-scholar == true && '--search-semantic-scholar' || '' }}
 
     - name: Upload CSV
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: research-papers
         path: papers.csv
