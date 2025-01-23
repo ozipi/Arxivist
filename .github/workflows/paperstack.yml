@@ -1,4 +1,4 @@
-name: PaperStack CSV Generator
+name: Paperstack (CSV)
 
 on:
   workflow_dispatch:
