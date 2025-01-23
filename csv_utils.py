@@ -33,8 +33,10 @@ def get_papers_from_csv(csv_path: str) -> List[Paper]:
 
 def write_papers_to_csv(csv_path: str, papers: List[Paper]) -> None:
     """Write papers to CSV file."""
-    # Ensure output directory exists
-    os.makedirs(os.path.dirname(csv_path), exist_ok=True)
+    # Ensure output directory exists if path contains directories
+    directory = os.path.dirname(csv_path)
+    if directory:
+        os.makedirs(directory, exist_ok=True)
     
     # If file exists, read existing papers to merge with new ones
     existing_papers = get_papers_from_csv(csv_path) if os.path.exists(csv_path) else []
