@@ -2,11 +2,7 @@ import argparse
 import os
 
 from arxiv_utils import fill_papers_with_arxiv, search_arxiv_as_paper
-from notion_utils import (
-    get_notion_client,
-    get_papers_from_notion,
-    write_papers_to_notion,
-)
+from csv_utils import get_papers_from_csv, write_papers_to_csv
 from openai_utils import (
     get_focus_label_from_abstract,
     get_openai_client,
@@ -25,16 +21,10 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-        "--notion-token",
+        "--output-csv",
         type=str,
-        default=os.environ.get("NOTION_TOKEN"),
-        help="Notion token",
-    )
-    parser.add_argument(
-        "--database-id",
-        type=str,
-        default=os.environ.get("NOTION_DATABASE_ID"),
-        help="Notion database id",
+        default="papers.csv",
+        help="Path to output CSV file",
     )
     parser.add_argument(
         "--openai-token",
@@ -50,11 +40,10 @@ def main():
 
     print("[+] Paperstack")
 
-    notion_client = get_notion_client(args.notion_token)
     openai_client = get_openai_client(args.openai_token)
 
-    print(f" |- Getting papers from Notion [{args.database_id}]")
-    papers = get_papers_from_notion(notion_client, args.database_id)
+    print(f" |- Reading existing papers from CSV [{args.output_csv}]")
+    papers = get_papers_from_csv(args.output_csv)
 
     if not all([p.has_arxiv_props() for p in papers]):
         print(" |- Filling in missing data from arXiv")
@@ -94,12 +83,9 @@ def main():
             paper.focus = get_focus_label_from_abstract(openai_client, paper.abstract)
             print(f"    |- {paper.focus}")
 
-    to_write = [p for p in papers if p.has_changed()]
-    if to_write:
-        print(f" |- Writing {len(to_write)} updates back to Notion")
-        write_papers_to_notion(notion_client, args.database_id, to_write)
-
-    print("[+] Done!")
+    print(f" |- Writing papers to CSV [{args.output_csv}]")
+    write_papers_to_csv(args.output_csv, papers)
+    print(f" |- Done! Saved {len(papers)} papers to {args.output_csv}")
 
 
 if __name__ == "__main__":

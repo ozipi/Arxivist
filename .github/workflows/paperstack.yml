@@ -1,0 +1,48 @@
+name: PaperStack CSV Generator
+
+on:
+  workflow_dispatch:
+    inputs:
+      search_query:
+        description: 'ArXiv search query (leave empty for default)'
+        required: false
+        type: string
+      max_results:
+        description: 'Maximum number of papers to fetch'
+        required: false
+        default: '10'
+        type: string
+
+jobs:
+  generate-papers:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run PaperStack
+      env:
+        OPENAI_API_TOKEN: ${{ secrets.OPENAI_API_TOKEN }}
+      run: |
+        python paperstack.py \
+          --output-csv "papers.csv" \
+          --search-arxiv \
+          --search-semantic-scholar \
+          ${{ inputs.search_query && format('--arxiv-search-query "{0}"', inputs.search_query) || '' }}
+    
+    - name: Upload CSV
+      uses: actions/upload-artifact@v3
+      with:
+        name: research-papers
+        path: papers.csv
+        retention-days: 30
