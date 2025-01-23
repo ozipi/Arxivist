@@ -10,9 +10,9 @@ Compress this abstract in 1-2 sentences. Use very concise language usable as \
 bullet points on a slide deck. Respond ONLY with your summary.
 """
 
-ASSIGN_LABEL_PROMPT = """\\
-You will be provided with an abstract of a scientific paper. \\
-Assess the most applicable focus label based on the target audience, \\
+ASSIGN_LABEL_PROMPT = """\
+You will be provided with an abstract of a scientific paper. \
+Assess the most applicable focus label based on the target audience, \
 research focus, produced materials, and key outcomes.
 
 {labels}
@@ -26,7 +26,7 @@ def get_openai_client(token: str) -> OpenAIClient:
 
 def summarize_abstract_with_openai(client: OpenAIClient, abstract: str) -> str:
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4",
         messages=[
             {"role": "system", "content": SUMMARIZE_ABSTRACT_PROMPT},
             {"role": "user", "content": f"{abstract}"},
