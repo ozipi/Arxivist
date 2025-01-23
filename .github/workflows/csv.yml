@@ -1,0 +1,12 @@
+name: Paperstack (CSV)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-core:
+    uses: ./.github/workflows/core.yml
+    secrets: inherit
+    with:
+      search-arxiv: true
+      search-scholar: true
