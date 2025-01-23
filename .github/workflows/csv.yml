@@ -2,26 +2,11 @@ name: Paperstack (CSV)
 
 on:
   workflow_dispatch:
-    inputs:
-      search-arxiv:
-        description: 'Search Arxiv?'
-        required: false
-        default: true
-        type: 'boolean'
-      search-scholar:
-        description: 'Search Semantic Scholar?'
-        required: false
-        default: true
-        type: 'boolean'
-      search-query:
-        description: 'ArXiv search query (leave empty for default)'
-        required: false
-        type: string
 
 jobs:
   call-core:
     uses: ./.github/workflows/core.yml
     secrets: inherit
     with:
-      search-arxiv: ${{ inputs.search-arxiv }}
-      search-scholar: ${{ inputs.search-scholar }}
+      search-arxiv: true
+      search-scholar: true
