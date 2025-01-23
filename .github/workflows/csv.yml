@@ -10,3 +10,29 @@ jobs:
     with:
       search-arxiv: true
       search-scholar: true
+
+  create-release:
+    needs: call-core
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download CSV artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: research-papers
+          path: research-papers
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Delete the old release if it exists
+          gh release delete latest-papers --cleanup-tag --yes || true
+          
+          # Create new release
+          gh release create latest-papers \
+            --title "Latest Research Papers" \
+            --notes "Latest research papers from PaperStack" \
+            research-papers/papers.csv \
+            --latest
