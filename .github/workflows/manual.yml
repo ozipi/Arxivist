@@ -1,4 +1,4 @@
-name: Paperstack (Manual)
+name: Arxivist (Manual)
 
 on:
   workflow_dispatch:

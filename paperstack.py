@@ -45,7 +45,7 @@ def main():
 
     args = parser.parse_args()
 
-    print("[+] Paperstack")
+    print("[+] Arxivist")
 
     openai_client = None
     if args.openai_token:
