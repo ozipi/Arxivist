@@ -29,18 +29,29 @@ def main():
     parser.add_argument(
         "--openai-token",
         type=str,
-        default=os.environ.get("OPENAI_API_TOKEN"),
-        help="OpenAI token",
+        default=None,
+        help="OpenAI token (optional)",
     )
     parser.add_argument("--arxiv-search-query", type=str, default=ARXIV_SEARCH)
     parser.add_argument("--search-arxiv", action="store_true", default=False)
     parser.add_argument("--search-semantic-scholar", action="store_true", default=False)
+    parser.add_argument(
+        "--output-obsidian",
+        type=str,
+        default="papers.md",
+        help="Path to output Obsidian folder"
+    )
 
     args = parser.parse_args()
 
     print("[+] Paperstack")
 
-    openai_client = get_openai_client(args.openai_token)
+    openai_client = None
+    if args.openai_token:
+        openai_client = get_openai_client(args.openai_token)
+        print(" |- OpenAI client initialized")
+    else:
+        print(" |- No OpenAI token provided; skipping OpenAI operations")
 
     print(f" |- Reading existing papers from CSV [{args.output_csv}]")
     papers = get_papers_from_csv(args.output_csv)
@@ -69,23 +80,23 @@ def main():
         else:
             print(" |- All papers have been explored")
 
-    if not all([paper.summary for paper in papers]):
-        print(" |- Building summaries with OpenAI")
-        for paper in [p for p in papers if not p.summary and p.abstract]:
-            print(f"    |- {paper.title[:50]}...")
-            paper.summary = summarize_abstract_with_openai(
-                openai_client, paper.abstract
-            )
-
-    if not all([paper.focus for paper in papers]):
-        print(" |- Assigning focus labels with OpenAI")
-        for paper in [p for p in papers if not p.focus and p.abstract]:
-            paper.focus = get_focus_label_from_abstract(openai_client, paper.abstract)
-            print(f"    |- {paper.focus}")
+    if openai_client:
+        print(" |- Generating summaries and focus labels using OpenAI")
+        for paper in papers:
+            if paper.abstract:
+                paper.summary = summarize_abstract_with_openai(openai_client, paper.abstract)
+                paper.focus = get_focus_label_from_abstract(openai_client, paper.abstract)
+    else:
+        print(" |- Skipping summary generation as no OpenAI token was provided")
 
     print(f" |- Writing papers to CSV [{args.output_csv}]")
     write_papers_to_csv(args.output_csv, papers)
     print(f" |- Done! Saved {len(papers)} papers to {args.output_csv}")
+
+    if args.output_obsidian:
+        print(f" |- Writing papers to Obsidian format [{args.output_obsidian}]")
+        from obsidian_utils import write_papers_to_obsidian
+        write_papers_to_obsidian(args.output_obsidian, papers)
 
 
 if __name__ == "__main__":
