@@ -9,6 +9,7 @@ from openai_utils import (
     summarize_abstract_with_openai,
 )
 from scholar_utils import get_recommended_arxiv_ids_from_semantic_scholar
+from obsidian_utils import write_papers_table_to_markdown
 
 ARXIV_SEARCH = """\
 "adversarial attacks" OR "language model attacks" OR "LLM vulnerabilities" OR \
@@ -97,6 +98,11 @@ def main():
         print(f" |- Writing papers to Obsidian format [{args.output_obsidian}]")
         from obsidian_utils import write_papers_to_obsidian
         write_papers_to_obsidian(args.output_obsidian, papers)
+
+    # Create the arxivist-papers.md file
+    arxivist_file_path = os.path.join(args.output_obsidian, "arxivist-papers.md")
+    print(f" |- Writing papers table to Markdown file [{arxivist_file_path}]")
+    write_papers_table_to_markdown(arxivist_file_path, papers)
 
 
 if __name__ == "__main__":

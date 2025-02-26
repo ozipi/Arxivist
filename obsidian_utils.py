@@ -36,4 +36,21 @@ def write_papers_to_obsidian(output_dir: str, papers: List[Paper]) -> None:
             
             if paper.abstract:
                 f.write("## Abstract\n")
-                f.write(f"{paper.abstract}\n") 
+                f.write(f"{paper.abstract}\n")
+
+def write_papers_table_to_markdown(output_file: str, papers: List[Paper]) -> None:
+    """Write a Markdown table of papers to a file."""
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write("# Arxivist Papers\n\n")
+        f.write("| Title | Authors | Published | URL | Summary | Focus |\n")
+        f.write("|-------|---------|-----------|-----|---------|-------|\n")
+
+        for paper in papers:
+            # Create an internal link for Obsidian
+            title_link = f"[[{paper.title}]]" if paper.title else "N/A"
+            authors = ", ".join(paper.authors) if paper.authors else "N/A"
+            published_date = paper.published.strftime('%Y-%m-%d') if paper.published else "N/A"
+            summary = paper.summary if paper.summary else "N/A"
+            focus = paper.focus.value if paper.focus else "N/A"
+
+            f.write(f"| {title_link} | {authors} | {published_date} | {paper.url} | {summary} | {focus} |\n")
