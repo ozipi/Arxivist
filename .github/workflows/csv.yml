@@ -1,4 +1,4 @@
-name: Paperstack (CSV)
+name: Arxivist (CSV)
 
 on:
   workflow_dispatch:
@@ -36,6 +36,6 @@ jobs:
           # Create new release
           gh release create latest-papers \
             --title "Latest Research Papers" \
-            --notes "Latest research papers from PaperStack" \
+            --notes "Latest research papers from Arxivist" \
             research-papers/papers.csv \
             --latest
