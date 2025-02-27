@@ -94,6 +94,9 @@ The following command line arguments can be used when running the Arxivist scrip
   Paper note in Obsidian:
   ![Arxivist graph paper selection in Obsidian](./docs/images/arxivist-obsidian-graph-paper.png)
 
+  Arxivist Graph of Soccer papers:
+  ![Arxivist soccer search](./docs/images/arxivist-output-football-terms.png)
+
 Thanks to [Dreadnode](https://dreadnode.io/) for the initial implementation of  [Paperstack](https://github.com/dreadnode/paperstack)!!
 
 # Future Work
