@@ -86,7 +86,7 @@ The following command line arguments can be used when running the Arxivist scrip
   ![Arxivist table in Obsidian](./docs/images/arxivist-output-obsidian-table-papers-graph.png)
 
   Full Graph in Obsidian:
-  ![Arxivist full graph in Obsidian](./docs/images/arxivist-output-obsidian-full-graph.png)
+  ![Arxivist full graph in Obsidian](./docs/images/arxivist-obsidian-graph-full.png)
 
   Graph Paper Selection in Obsidian:
   ![Arxivist graph paper selection in Obsidian](./docs/images/arxivist-obsidian-graph-selection.png)
