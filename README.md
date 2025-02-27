@@ -8,7 +8,6 @@ Arxivist uses ArXiv and Semantic Scholar (relational) to sync academic paper inf
 
 The Notion DB requires a semi-fixed structure as a function of the syncing logic (`notion_utils.py`), and you're free to add columns and custom syncing behavior as needed. Here is the mininmum database layout the tool currently expects:
 
-
 ```
 Title [Title]
 Summary [Text]
@@ -27,4 +26,44 @@ NOTION_DATABASE_ID
 OPENAI_API_TOKEN
 ```
 
-Hack away!
+# Usage
+
+```
+python arxivist.py --output-obsidian <path>
+```
+
+## Command Line Arguments
+
+The following command line arguments can be used when running the Arxivist script:
+
+- `--output-csv <path>`:
+  - **Type**: `str`
+  - **Default**: `papers.csv`
+  - **Description**: Specifies the path to the output CSV file where the paper information will be saved.
+
+- `--openai-token <token>`:
+  - **Type**: `str`
+  - **Default**: `None`
+  - **Description**: Optional OpenAI token for using OpenAI's API for summarization and focus label generation.
+
+- `--arxiv-search-query <query>`:
+  - **Type**: `str`
+  - **Default**: A predefined search query for arXiv papers related to machine learning and security.
+  - **Description**: The search query used to find relevant papers on arXiv. You can customize this to search for different topics.
+
+- `--search-arxiv`:
+  - **Type**: `boolean`
+  - **Default**: `False`
+  - **Description**: If specified, the script will search arXiv for new papers based on the provided search query.
+
+- `--search-semantic-scholar`:
+  - **Type**: `boolean`
+  - **Default**: `False`
+  - **Description**: If specified, the script will search Semantic Scholar for related papers to the ones already collected.
+
+- `--output-obsidian <path>`:
+  - **Type**: `str`
+  - **Default**: `papers.md`
+  - **Description**: Specifies the path to the output folder for writing papers in Obsidian markdown format.
+
+Thanks to [Dreadnode](https://dreadnode.io/) for the initial implementation of  [Paperstack](https://github.com/dreadnode/paperstack)!!
