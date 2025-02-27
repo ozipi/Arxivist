@@ -77,3 +77,9 @@ The following command line arguments can be used when running the Arxivist scrip
   ![Arxivist table in Obsidian](arxivist-output-obsidian-table-papers-graph.png)
 
 Thanks to [Dreadnode](https://dreadnode.io/) for the initial implementation of  [Paperstack](https://github.com/dreadnode/paperstack)!!
+
+# Future Work
+
+- Add a local LLM for summarization and focus label generation.
+- Add a key points to send it to a srs (spaced repetition system) service.
+- Add a service for easier user usage.
