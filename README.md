@@ -66,4 +66,14 @@ The following command line arguments can be used when running the Arxivist scrip
   - **Default**: `papers.md`
   - **Description**: Specifies the path to the output folder for writing papers in Obsidian markdown format.
 
+  # Output
+  After running the script, you will have a `arxivist-papers.md` file in the output folder containing a table of the papers.
+
+  You can send the output into your Obsidian vault and use it as a reference for your papers.
+
+  ![Arxivist output papers file](arxivist-output-papers-file.png)
+
+  Final output in Obsidian:
+  ![Arxivist table in Obsidian](arxivist-output-obsidian-table-papers-graph.png)
+
 Thanks to [Dreadnode](https://dreadnode.io/) for the initial implementation of  [Paperstack](https://github.com/dreadnode/paperstack)!!
