@@ -1,13 +1,21 @@
-# Arxivist
 
-Arxivist is a fork from [Paperstack](https://github.com/dreadnode/paperstack) with a focus on using Obsidian as a primary output format.
+
+<div align="center">
+  <h1><strong>The Arxivist</strong></h1>
+</div>
+
+Arxivist is a fork from [Paperstack](https://github.com/dreadnode/paperstack) with a focus on using Obsidian as a primary output format. 
+
 
 ![Arxivist](./docs/images/arxivist.jpg)
 
-Arxivist uses ArXiv and Semantic Scholar (relational) to sync academic paper information into a Notion DB. It also has some lightweight uses of OpenAI models for summarization and categorization. It was built for gathering machine learning and security related papers, but could be adapted easily to any other subject (`ARXIV_SEARCH`/`--arxiv-search-query`). It's deplyoment is focused on Github actions, but can be executed on the command line directly. It can also detect partial entries (ArXiv link or title) in the Notion DB and fill in the remaining information.
+From the original Paperstack README:
 
-The Notion DB requires a semi-fixed structure as a function of the syncing logic (`notion_utils.py`), and you're free to add columns and custom syncing behavior as needed. Here is the mininmum database layout the tool currently expects:
+> Arxivist uses ArXiv and Semantic Scholar (relational) to sync academic paper information into a Notion DB. It also has some lightweight uses of OpenAI models for summarization and categorization. It was built for gathering machine learning and security related papers, but could be adapted easily to any other subject (`ARXIV_SEARCH`/`--arxiv-search-query`). It's deplyoment is focused on Github actions, but can be executed on the command line directly. It can also detect partial entries (ArXiv link or title) in the Notion DB and fill in the remaining information.
 
+> The Notion DB requires a semi-fixed structure as a function of the syncing logic (`notion_utils.py`), and you're free to add columns and custom syncing behavior as needed. Here is the mininmum database layout the tool currently expects:
+
+> 
 ```
 Title [Title]
 Summary [Text]
@@ -18,8 +26,9 @@ Published [Date]
 Explored [Checkbox]
 ```
 
-The majority of command line arguments can be passed via environment variables as expected by the workflows.
+> The majority of command line arguments can be passed via environment variables as expected by the workflows.
 
+>
 ```
 NOTION_TOKEN
 NOTION_DATABASE_ID
@@ -77,7 +86,7 @@ The following command line arguments can be used when running the Arxivist scrip
   ![Arxivist table in Obsidian](./docs/images/arxivist-output-obsidian-table-papers-graph.png)
 
   Full Graph in Obsidian:
-  ![Arxivist full graph in Obsidian](./docs/images/arxivist-obsidian-graph-full.png)
+  ![Arxivist full graph in Obsidian](./docs/images/arxivist-output-obsidian-full-graph.png)
 
   Graph Paper Selection in Obsidian:
   ![Arxivist graph paper selection in Obsidian](./docs/images/arxivist-obsidian-graph-selection.png)
